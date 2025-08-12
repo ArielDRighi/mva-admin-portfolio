@@ -8,11 +8,11 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // Configuración para producción
-  assetPrefix: process.env.NODE_ENV === 'production' ? 'https://admin.mvasrl.com' : '',
-  publicRuntimeConfig: {
-    basePath: process.env.NODE_ENV === 'production' ? 'https://admin.mvasrl.com' : '',
-  },
+  // Configuración para producción - COMENTADO PARA DESARROLLO LOCAL
+  // assetPrefix: process.env.NODE_ENV === 'production' ? 'https://admin.mvasrl.com' : '',
+  // publicRuntimeConfig: {
+  //   basePath: process.env.NODE_ENV === 'production' ? 'https://admin.mvasrl.com' : '',
+  // },
 };
 
 export default nextConfig;

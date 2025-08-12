@@ -3,6 +3,7 @@
 import { setCookie } from "cookies-next";
 import { toast } from "sonner";
 import { getErrorMessage } from "@/lib/errors";
+import { config } from "@/app/config";
 
 /**
  * Función para autenticar al usuario y establecer las cookies de sesión
@@ -14,16 +15,13 @@ import { getErrorMessage } from "@/lib/errors";
  */
 export async function loginUser(email: string, password: string) {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      }
-    );
+    const res = await fetch(`${config.apiUrl}/api/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
 
     if (!res.ok) {
       const error = await res.json().catch(() => ({}));
@@ -31,7 +29,6 @@ export async function loginUser(email: string, password: string) {
     }
 
     const data = await res.json();
-
     setCookie("token", data.access_token);
     setCookie("user", JSON.stringify(data.user));
 
@@ -59,22 +56,17 @@ export async function forgotPassword(email: string): Promise<{
   };
 }> {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/auth/forgot_password`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      }
-    );
+    const res = await fetch(`${config.apiUrl}/api/auth/forgot_password`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
 
     if (!res.ok) {
       const error = await res.json().catch(() => ({}));
-      throw new Error(
-        error.message || "Error al enviar el email de restablecimiento"
-      );
+      throw new Error(error.message || "Error al enviar el email de restablecimiento");
     }
 
     const data = await res.json();
@@ -106,17 +98,14 @@ export async function changePassword(
       throw new Error("No hay sesión activa");
     }
 
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/auth/change_password`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Agregar token automáticamente
-        },
-        body: JSON.stringify({ oldPassword, newPassword }),
-      }
-    );
+    const res = await fetch(`${config.apiUrl}/api/auth/change_password`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Agregar token automáticamente
+      },
+      body: JSON.stringify({ oldPassword, newPassword }),
+    });
 
     if (!res.ok) {
       const error = await res.json().catch(() => ({}));

@@ -1,0 +1,28 @@
+# Archivos específicos de otros hosting
+ecosystem.config.js
+start-https.js
+
+# Documentación de deploy anterior
+DEPLOYMENT_SUMMARY.md
+DEPLOY_CLEAN.md
+message.md
+
+# Archivos temporales y debug
+debug-config.js
+temp/
+temp_fix.js
+fix_build_errors.js
+fix-calendar-deps.sh
+
+# Build scripts específicos de servidor
+build-no-lint.sh
+build.sh
+
+# Archivos de desarrollo local
+.env.local
+
+# Directorios de documentación específica
+docs/
+
+# Archivos que no son necesarios para Vercel
+README.md
