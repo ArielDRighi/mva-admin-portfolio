@@ -27,7 +27,6 @@
   }
 }
 
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -198,6 +197,13 @@
   color: #003f4f;
   font-weight: 700;
   margin: 5px 0 10px 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* Logo AR */
+.logo-container {
+  position: relative;
   z-index: 2;
 }
 
@@ -313,8 +319,7 @@
 .three-body__dot:nth-child(2)::after {
   bottom: 0;
   left: 0;
-  animation: wobble1 var(--uib-speed) infinite calc(var(--uib-speed) * -0.15)
-    ease-in-out;
+  animation: wobble1 var(--uib-speed) infinite calc(var(--uib-speed) * -0.15) ease-in-out;
 }
 
 .three-body__dot:nth-child(3) {

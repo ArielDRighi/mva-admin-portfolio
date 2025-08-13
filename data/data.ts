@@ -1,20 +1,10 @@
-import { LogoMVA } from "@/assets/ImgDatabase";
-import {
-  Car,
-  Users,
-  Toilet,
-  UserCheck,
-  Hammer,
-  Wrench,
-  UserCog,
-  Shirt,
-  DollarSign,
-} from "lucide-react";
+import { LogoAR } from "@/assets/ImgDatabase";
+import { Car, Users, Toilet, UserCheck, Hammer, Wrench, UserCog, Shirt, DollarSign } from "lucide-react";
 
 const dataSideBar = {
   team: {
-    name: "MVA SRL",
-    logo: LogoMVA,
+    name: "AR SRL",
+    logo: LogoAR,
     plan: "Sistema de Gestión",
     url: "admin/dashboard",
   },

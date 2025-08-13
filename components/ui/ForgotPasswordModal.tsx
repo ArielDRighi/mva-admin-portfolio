@@ -3,21 +3,8 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -72,8 +59,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }: ForgotPasswordModalProps) => {
         <DialogHeader>
           <DialogTitle>Restablecer contraseña</DialogTitle>
           <DialogDescription>
-            Ingresa tu email y te enviaremos un enlace para restablecer tu
-            contraseña.
+            Ingresa tu email y te enviaremos un enlace para restablecer tu contraseña.
           </DialogDescription>
         </DialogHeader>
 
@@ -86,11 +72,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }: ForgotPasswordModalProps) => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="empleado@mva.com"
-                      {...field}
-                      disabled={isLoading}
-                    />
+                    <Input placeholder="empleado@ar.com" {...field} disabled={isLoading} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -98,13 +80,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }: ForgotPasswordModalProps) => {
             />
 
             <div className="flex gap-3 pt-4">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={onClose}
-                disabled={isLoading}
-                className="flex-1"
-              >
+              <Button type="button" variant="outline" onClick={onClose} disabled={isLoading} className="flex-1">
                 Cancelar
               </Button>
               <Button type="submit" disabled={isLoading} className="flex-1">

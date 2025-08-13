@@ -1,12 +1,7 @@
 "use client";
 
 import * as React from "react";
-import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar";
-import Image from "next/image";
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
 import Link from "next/link";
 
 export function TeamSwitcher({
@@ -28,14 +23,8 @@ export function TeamSwitcher({
           asChild
         >
           <Link href={`/${team.url}`}>
-            <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-sidebar-primary-foreground">
-              <Image
-                src={team.logo}
-                alt={team.name}
-                className="size-8"
-                width={32}
-                height={32}
-              />
+            <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-indigo-600 text-white font-bold">
+              {team.logo}
             </div>
             <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="truncate font-semibold">{team.name}</span>

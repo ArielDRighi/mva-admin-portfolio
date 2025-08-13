@@ -6,13 +6,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { getEmployees } from "@/app/actions/empleados";
 import { createServiceCapacitacion } from "@/app/actions/services";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -70,11 +64,7 @@ export default function CapacitacionesCrearComponent() {
       const response = (await getEmployees(1, 20, search)) as EmployeeResponse;
       if (response && "data" in response && Array.isArray(response.data)) {
         setEmployees(response.data);
-      } else if (
-        response &&
-        "items" in response &&
-        Array.isArray(response.items)
-      ) {
+      } else if (response && "items" in response && Array.isArray(response.items)) {
         setEmployees(response.items);
       } else if (Array.isArray(response)) {
         setEmployees(response as Employee[]);
@@ -136,9 +126,7 @@ export default function CapacitacionesCrearComponent() {
       router.push("/admin/dashboard/servicios/listado");
     } catch (error) {
       console.error("Error creating capacitación:", error);
-      toast.error(
-        error instanceof Error ? error.message : "Error al crear la capacitación"
-      );
+      toast.error(error instanceof Error ? error.message : "Error al crear la capacitación");
     } finally {
       setSubmitting(false);
     }
@@ -211,9 +199,7 @@ export default function CapacitacionesCrearComponent() {
                     className="w-full"
                   />
                 </div>
-                {!startDate && (
-                  <p className="text-red-500 text-sm">Este campo es requerido</p>
-                )}
+                {!startDate && <p className="text-red-500 text-sm">Este campo es requerido</p>}
               </div>
               {/* Fecha Fin */}
               <div className="space-y-2">
@@ -234,9 +220,7 @@ export default function CapacitacionesCrearComponent() {
                     className="w-full"
                   />
                 </div>
-                {!endDate && (
-                  <p className="text-red-500 text-sm">Este campo es requerido</p>
-                )}
+                {!endDate && <p className="text-red-500 text-sm">Este campo es requerido</p>}
               </div>
               {/* Ubicación */}
               <div className="md:col-span-2 space-y-2">
@@ -250,12 +234,10 @@ export default function CapacitacionesCrearComponent() {
                   id="ubicacion"
                   type="text"
                   {...register("ubicacion", { required: true })}
-                  placeholder="Ej: Centro de Capacitación MVA"
+                  placeholder="Ej: Centro de Capacitación AR"
                   className="w-full"
                 />
-                {errors.ubicacion && (
-                  <p className="text-red-500 text-sm">Este campo es requerido</p>
-                )}
+                {errors.ubicacion && <p className="text-red-500 text-sm">Este campo es requerido</p>}
               </div>
             </div>
             {/* Selección de Empleados */}
@@ -306,8 +288,13 @@ export default function CapacitacionesCrearComponent() {
                     const emp = selectedEmployeesMap[id];
                     if (!emp) return null;
                     return (
-                      <div key={id} className="flex items-center gap-2 bg-blue-50 border border-blue-200 rounded px-3 py-1">
-                        <span className="font-medium">{emp.apellido}, {emp.nombre}</span>
+                      <div
+                        key={id}
+                        className="flex items-center gap-2 bg-blue-50 border border-blue-200 rounded px-3 py-1"
+                      >
+                        <span className="font-medium">
+                          {emp.apellido}, {emp.nombre}
+                        </span>
                         <span className="text-xs text-gray-500">DNI: {emp.documento}</span>
                         <Button
                           type="button"
@@ -329,9 +316,7 @@ export default function CapacitacionesCrearComponent() {
                 <Loader />
               </div>
             ) : employees.length === 0 ? (
-              <div className="text-center py-8 text-gray-500 border rounded-md">
-                No hay empleados disponibles
-              </div>
+              <div className="text-center py-8 text-gray-500 border rounded-md">No hay empleados disponibles</div>
             ) : (
               <div className="max-h-96 overflow-y-auto border rounded-md">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 p-4">
@@ -339,9 +324,7 @@ export default function CapacitacionesCrearComponent() {
                     <div
                       key={employee.id}
                       className={`border p-3 rounded-md cursor-pointer transition-colors ${
-                        selectedEmployees.includes(employee.id)
-                          ? "bg-blue-50 border-blue-300"
-                          : "hover:bg-slate-50"
+                        selectedEmployees.includes(employee.id) ? "bg-blue-50 border-blue-300" : "hover:bg-slate-50"
                       }`}
                       onClick={() => handleEmployeeSelection(employee.id, employee)}
                     >
@@ -349,9 +332,7 @@ export default function CapacitacionesCrearComponent() {
                         <div className="flex-shrink-0 mr-3">
                           <div
                             className={`w-10 h-10 rounded-full flex items-center justify-center text-white ${
-                              selectedEmployees.includes(employee.id)
-                                ? "bg-blue-500"
-                                : "bg-slate-400"
+                              selectedEmployees.includes(employee.id) ? "bg-blue-500" : "bg-slate-400"
                             }`}
                           >
                             {employee.nombre.charAt(0)}
@@ -380,9 +361,7 @@ export default function CapacitacionesCrearComponent() {
               </div>
             )}
             {selectedEmployees.length === 0 && (
-              <p className="text-red-500 text-sm mt-2">
-                Debes seleccionar al menos un empleado
-              </p>
+              <p className="text-red-500 text-sm mt-2">Debes seleccionar al menos un empleado</p>
             )}
             {/* Botones */}
             <div className="mt-8 flex justify-end space-x-3">
@@ -400,11 +379,7 @@ export default function CapacitacionesCrearComponent() {
               >
                 Cancelar
               </Button>
-              <Button
-                type="submit"
-                disabled={submitting}
-                className="bg-indigo-600 hover:bg-indigo-700"
-              >
+              <Button type="submit" disabled={submitting} className="bg-indigo-600 hover:bg-indigo-700">
                 {submitting ? (
                   <>
                     <RefreshCcw className="mr-2 h-4 w-4 animate-spin" />

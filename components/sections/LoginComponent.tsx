@@ -3,20 +3,12 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
 import { loginUser } from "@/app/actions/login";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import Loader from "../ui/local/Loader";
 import { toast } from "sonner";
 import ForgotPasswordModal from "../ui/ForgotPasswordModal";
@@ -87,17 +79,13 @@ const LoginComponent = () => {
     <>
       <Form {...form}>
         <div className="form_wrapper">
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 form_main"
-          >
-            <Image
-              src="/images/MVA_LogoPNG.png"
-              alt="Logo"
-              width={120}
-              height={120}
-              className="z-10"
-            />
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 form_main">
+            <div className="flex flex-col items-center mb-6 logo-container">
+              <div className="h-24 w-24 bg-teal-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                <span className="text-white font-bold text-4xl">AR</span>
+              </div>
+              <h2 className="text-2xl font-bold mb-2">AR SRL</h2>
+            </div>
             <h1 className="heading">Iniciar sesión</h1>
 
             <div className="inputContainer">
@@ -118,12 +106,7 @@ const LoginComponent = () => {
                       <path d="M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646 2.318-5.646 5.702 0 3.493 2.235 5.708 5.762 5.708.862 0 1.689-.123 2.304-.335v-.862c-.43.199-1.354.328-2.29.328-2.926 0-4.813-1.88-4.813-4.798 0-2.844 1.921-4.881 4.594-4.881 2.735 0 4.608 1.688 4.608 4.156 0 1.682-.554 2.769-1.416 2.769-.492 0-.772-.28-.772-.76V5.206H8.923v.834h-.11c-.266-.595-.881-.964-1.6-.964-1.4 0-2.378 1.162-2.378 2.823 0 1.737.957 2.906 2.379 2.906.8 0 1.415-.39 1.709-1.087h.11c.081.67.703 1.148 1.503 1.148 1.572 0 2.57-1.415 2.57-3.643zm-7.177.704c0-1.197.54-1.907 1.456-1.907.93 0 1.524.738 1.524 1.907S8.308 9.84 7.371 9.84c-.895 0-1.442-.725-1.442-1.914z"></path>
                     </svg>
                     <FormControl>
-                      <Input
-                        placeholder="empleado@mva.com"
-                        {...field}
-                        id="email"
-                        className="inputField"
-                      />
+                      <Input placeholder="empleado@ar.com" {...field} id="email" className="inputField" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -161,11 +144,7 @@ const LoginComponent = () => {
                           type="button"
                           onClick={togglePasswordVisibility}
                           className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-transparent border-none cursor-pointer"
-                          aria-label={
-                            showPassword
-                              ? "Ocultar contraseña"
-                              : "Mostrar contraseña"
-                          }
+                          aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
                         >
                           {showPassword ? (
                             <svg
@@ -200,9 +179,7 @@ const LoginComponent = () => {
               />
             </div>
 
-            {formError && (
-              <p className="text-sm text-red-500 z-10">{formError}</p>
-            )}
+            {formError && <p className="text-sm text-red-500 z-10">{formError}</p>}
 
             {isLoading ? (
               <Loader />
@@ -217,22 +194,14 @@ const LoginComponent = () => {
               </Button>
             )}
 
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full cursor-pointer"
-              onClick={handleForgotPassword}
-            >
+            <Button type="button" variant="outline" className="w-full cursor-pointer" onClick={handleForgotPassword}>
               ¿Olvidaste tu contraseña?
             </Button>
           </form>
         </div>
       </Form>
 
-      <ForgotPasswordModal
-        isOpen={showForgotPasswordModal}
-        onClose={() => setShowForgotPasswordModal(false)}
-      />
+      <ForgotPasswordModal isOpen={showForgotPasswordModal} onClose={() => setShowForgotPasswordModal(false)} />
     </>
   );
 };

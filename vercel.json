@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "name": "mva-admin-frontend",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "env": {
+    "NEXT_PUBLIC_API_URL": "https://mva-backend-portfolio-production.up.railway.app/api",
+    "NEXT_PUBLIC_BASE_URL": "https://mva-backend-portfolio-production.up.railway.app",
+    "NEXT_PUBLIC_ENV": "production"
+  }
+}

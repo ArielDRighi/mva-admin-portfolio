@@ -1,8 +1,22 @@
 # Deploy Guide - Vercel
 
-## 🚀 Guía de Despliegue para Vercel
+## 🚀 Guía de Despliegue para Vercel - MVA Admin
 
-Esta documentación te ayudará a configurar correctamente el frontend para desplegar en Vercel después de limpiar las configuraciones específicas de Hostinger.
+Esta documentación te ayudará a configurar correctamente el frontend para desplegar en Vercel con el backend de Railway ya desplegado.
+
+### 🎯 **BACKEND DESPLEGADO:**
+
+```
+https://mva-backend-portfolio-production.up.railway.app
+```
+
+### 🔐 **CREDENCIALES DE PRUEBA:**
+
+```bash
+EMAIL: test@ar.com
+PASSWORD: Test1234
+ROLES: ["ADMIN"]
+```
 
 ---
 
@@ -10,11 +24,11 @@ Esta documentación te ayudará a configurar correctamente el frontend para desp
 
 ### ✅ Checklist antes del deploy:
 
-- [ ] Backend desplegado y accesible (con su URL pública)
-- [ ] Variables de entorno configuradas
-- [ ] Configuraciones de Hostinger removidas/comentadas
-- [ ] Build local funcionando correctamente (`npm run build` + `npm run start`)
-- [ ] Login funcionando en desarrollo local
+- [x] Backend desplegado y accesible en Railway
+- [ ] Variables de entorno configuradas en Vercel
+- [x] Configuraciones específicas removidas
+- [ ] Build local funcionando correctamente (`npm run build`)
+- [ ] Testing con las credenciales de prueba
 
 ---
 
@@ -25,21 +39,22 @@ Esta documentación te ayudará a configurar correctamente el frontend para desp
 En tu dashboard de Vercel, ve a **Settings → Environment Variables** y agrega:
 
 ```bash
-# Variable principal - URL de tu backend en producción
-NEXT_PUBLIC_API_URL=https://tu-backend-url.com
+# URL principal del API (tu backend en Railway)
+NEXT_PUBLIC_API_URL=https://mva-backend-portfolio-production.up.railway.app/api
 
-# Variable de autenticación (genera una nueva para producción)
-AUTH_SECRET=tu_nuevo_auth_secret_aqui_muy_seguro
+# URL base del backend (sin /api)
+NEXT_PUBLIC_BASE_URL=https://mva-backend-portfolio-production.up.railway.app
 
-# Ambiente
+# Entorno
+NEXT_PUBLIC_ENV=production
 NODE_ENV=production
 ```
 
 **⚠️ Importante**:
 
-- `NEXT_PUBLIC_API_URL` debe apuntar a tu backend en producción
-- `AUTH_SECRET` debe ser diferente al de desarrollo
-- Estas variables deben estar disponibles tanto en **Development**, **Preview** y **Production**
+- `NEXT_PUBLIC_API_URL` debe apuntar a tu backend en Railway con `/api` al final
+- `NEXT_PUBLIC_BASE_URL` es la URL base sin `/api`
+- Estas variables deben estar disponibles en **Development**, **Preview** y **Production**
 
 ---
 
@@ -149,7 +164,7 @@ rm debug-config.js           # Archivo temporal
 - Ve a [vercel.com](https://vercel.com)
 - Click en **"New Project"**
 - Conecta tu repositorio de GitHub
-- Selecciona `mva-admin-portfolio`
+- Selecciona `ar-admin-portfolio`
 
 ### **2. Build Settings**
 
