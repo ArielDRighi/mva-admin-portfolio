@@ -1,13 +1,12 @@
 "use client";
+import { CreateTallesDto, UpdateTallesDto } from "@/app/actions/clothing";
 import {
-  CreateTallesDto,
-  UpdateTallesDto,
+  getTallesEmpleados,
   createTallesEmpleado,
+  updateTallesEmpleado,
   deleteTallesEmpleado,
   exportTallesToExcel,
-  getTallesEmpleados,
-  updateTallesEmpleado,
-} from "@/app/actions/clothing";
+} from "@/lib/apiClient";
 import { RopaTalles } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -22,13 +21,7 @@ import { Button } from "../ui/button";
 import { FormDialog } from "../ui/local/FormDialog";
 import { FormField } from "../ui/local/FormField";
 import { Trash2, Edit2, PlusCircle, FileDown, Shirt, User } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { EmpleadoSelector } from "../ui/local/SearchSelector/Selectors/EmpleadoSelector";
 
 const TallesEmpleadosComponent = ({
@@ -63,19 +56,11 @@ const TallesEmpleadosComponent = ({
     calzado_talle: z.string().min(1, "El talle de calzado es obligatorio"),
     pantalon_talle: z.string().min(1, "El talle de pantalón es obligatorio"),
     camisa_talle: z.string().min(1, "El talle de camisa es obligatorio"),
-    campera_bigNort_talle: z
-      .string()
-      .min(1, "El talle de campera BigNort es obligatorio"),
-    pielBigNort_talle: z
-      .string()
-      .min(1, "El talle de piel BigNort es obligatorio"),
+    campera_bigNort_talle: z.string().min(1, "El talle de campera BigNort es obligatorio"),
+    pielBigNort_talle: z.string().min(1, "El talle de piel BigNort es obligatorio"),
     medias_talle: z.string().min(1, "El talle de medias es obligatorio"),
-    pantalon_termico_bigNort_talle: z
-      .string()
-      .min(1, "El talle de pantalón térmico es obligatorio"),
-    campera_polar_bigNort_talle: z
-      .string()
-      .min(1, "El talle de campera polar es obligatorio"),
+    pantalon_termico_bigNort_talle: z.string().min(1, "El talle de pantalón térmico es obligatorio"),
+    campera_polar_bigNort_talle: z.string().min(1, "El talle de campera polar es obligatorio"),
     mameluco_talle: z.string().min(1, "El talle de mameluco es obligatorio"),
   });
 
@@ -120,10 +105,7 @@ const TallesEmpleadosComponent = ({
     setValue("campera_bigNort_talle", talles.campera_bigNort_talle);
     setValue("pielBigNort_talle", talles.pielBigNort_talle);
     setValue("medias_talle", talles.medias_talle);
-    setValue(
-      "pantalon_termico_bigNort_talle",
-      talles.pantalon_termico_bigNort_talle
-    );
+    setValue("pantalon_termico_bigNort_talle", talles.pantalon_termico_bigNort_talle);
     setValue("campera_polar_bigNort_talle", talles.campera_polar_bigNort_talle);
     setValue("mameluco_talle", talles.mameluco_talle);
   };
@@ -176,9 +158,7 @@ const TallesEmpleadosComponent = ({
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `talles-empleados-${
-        new Date().toISOString().split("T")[0]
-      }.xlsx`;
+      a.download = `talles-empleados-${new Date().toISOString().split("T")[0]}.xlsx`;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
@@ -208,8 +188,7 @@ const TallesEmpleadosComponent = ({
       } else {
         await createTallesEmpleado(empleadoId, tallesData as CreateTallesDto);
         toast.success("Talles registrados", {
-          description:
-            "Los talles del empleado se han registrado correctamente.",
+          description: "Los talles del empleado se han registrado correctamente.",
         });
       }
 
@@ -219,9 +198,7 @@ const TallesEmpleadosComponent = ({
     } catch (error) {
       console.error("Error en el envío del formulario:", error);
       toast.error("Error", {
-        description: selectedTalles
-          ? "No se pudieron actualizar los talles."
-          : "No se pudieron crear los talles.",
+        description: selectedTalles ? "No se pudieron actualizar los talles." : "No se pudieron crear los talles.",
       });
     }
   };
@@ -233,11 +210,7 @@ const TallesEmpleadosComponent = ({
       setLoading(true);
 
       // Now passing the search term to getTallesEmpleados
-      const fetchedTalles = await getTallesEmpleados(
-        currentPage,
-        itemsPerPage,
-        searchTerm
-      );
+      const fetchedTalles = await getTallesEmpleados(currentPage, itemsPerPage, searchTerm);
 
       if (fetchedTalles.data && Array.isArray(fetchedTalles.data)) {
         setTallesEmpleados(fetchedTalles.data);
@@ -258,8 +231,7 @@ const TallesEmpleadosComponent = ({
       setTotal(0);
       setPage(1);
       toast.error("Error", {
-        description:
-          "Ocurrió un error al cargar los talles. Por favor, intenta nuevamente.",
+        description: "Ocurrió un error al cargar los talles. Por favor, intenta nuevamente.",
       });
     } finally {
       setLoading(false);
@@ -290,28 +262,17 @@ const TallesEmpleadosComponent = ({
       <CardHeader className="bg-slate-50 dark:bg-slate-900 border-b">
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="text-2xl font-bold">
-              Gestión de Talles de Empleados
-            </CardTitle>
+            <CardTitle className="text-2xl font-bold">Gestión de Talles de Empleados</CardTitle>
             <CardDescription className="text-muted-foreground mt-1">
-              Administra los talles de ropa y calzado de los empleados de la
-              empresa
+              Administra los talles de ropa y calzado de los empleados de la empresa
             </CardDescription>
           </div>
           <div className="flex gap-2">
-            <Button
-              onClick={handleExportToExcel}
-              variant="outline"
-              disabled={exporting}
-              className="cursor-pointer"
-            >
+            <Button onClick={handleExportToExcel} variant="outline" disabled={exporting} className="cursor-pointer">
               <FileDown className="mr-2 h-4 w-4" />
               Exportar a Excel
             </Button>
-            <Button
-              onClick={handleCreateClick}
-              className="cursor-pointer bg-indigo-600 hover:bg-indigo-700"
-            >
+            <Button onClick={handleCreateClick} className="cursor-pointer bg-indigo-600 hover:bg-indigo-700">
               <PlusCircle className="mr-2 h-4 w-4" />
               Nuevo Registro
             </Button>
@@ -366,8 +327,7 @@ const TallesEmpleadosComponent = ({
                     </div>
                     <div>
                       <div className="font-medium">
-                        {talles.empleado?.nombre || "Sin nombre"}{" "}
-                        {talles.empleado?.apellido || ""}
+                        {talles.empleado?.nombre || "Sin nombre"} {talles.empleado?.apellido || ""}
                       </div>
                     </div>
                   </div>
@@ -439,10 +399,7 @@ const TallesEmpleadosComponent = ({
                   <Button
                     variant="destructive"
                     size="sm"
-                    onClick={() =>
-                      talles.empleado?.id &&
-                      handleDeleteClick(talles.empleado.id)
-                    }
+                    onClick={() => talles.empleado?.id && handleDeleteClick(talles.empleado.id)}
                     className="cursor-pointer bg-red-100 text-red-700 hover:bg-red-200 hover:text-red-800"
                   >
                     <Trash2 className="h-3.5 w-3.5 mr-1" />
@@ -463,11 +420,7 @@ const TallesEmpleadosComponent = ({
             setSelectedTalles(null);
           }
         }}
-        title={
-          selectedTalles
-            ? "Editar Talles de Empleado"
-            : "Registrar Talles de Empleado"
-        }
+        title={selectedTalles ? "Editar Talles de Empleado" : "Registrar Talles de Empleado"}
         description={
           selectedTalles
             ? "Modificar información de talles del empleado en el sistema."
@@ -658,10 +611,7 @@ const TallesEmpleadosComponent = ({
       >
         <div className="space-y-4 py-4">
           <p className="text-destructive font-semibold">¡Atención!</p>
-          <p>
-            Esta acción eliminará permanentemente los talles del empleado.
-            ¿Estás seguro de que deseas continuar?
-          </p>
+          <p>Esta acción eliminará permanentemente los talles del empleado. ¿Estás seguro de que deseas continuar?</p>
         </div>
       </FormDialog>
     </Card>
