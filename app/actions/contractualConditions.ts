@@ -65,7 +65,7 @@ export const getAllContractualConditions = createServerAction(
     // Si search es vacío, no se filtra por búsqueda y trae todos
     const searchQuery = search ? `&search=${search}` : "";
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/contractual_conditions?page=${page}&limit=${limit}${searchQuery}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/contractual_conditions?page=${page}&limit=${limit}${searchQuery}`,
       {
         headers,
         cache: "no-store",
@@ -85,7 +85,7 @@ export const getContractualConditionById = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/contractual_conditions/id/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/contractual_conditions/id/${id}`,
       {
         headers,
         cache: "no-store",
@@ -116,7 +116,7 @@ export const getContractualConditionsByClient = createServerAction(
     );
     // Si search es vacío, no se filtra por búsqueda
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/contractual_conditions/client-id/${clientId}?page=${page}&limit=${limit}&search=${search}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/contractual_conditions/client-id/${clientId}?page=${page}&limit=${limit}&search=${search}`,
       {
         headers,
         cache: "no-store",
@@ -139,7 +139,7 @@ export const createContractualCondition = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/contractual_conditions/create`,
+      `${process.env.NEXT_PUBLIC_API_URL}/contractual_conditions/create`,
       {
         method: "POST",
         headers,
@@ -161,7 +161,7 @@ export const updateContractualCondition = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/contractual_conditions/modify/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/contractual_conditions/modify/${id}`,
       {
         method: "PUT",
         headers,
@@ -186,7 +186,7 @@ export const deleteContractualCondition = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/contractual_conditions/delete/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/contractual_conditions/delete/${id}`,
       {
         method: "DELETE",
         headers,

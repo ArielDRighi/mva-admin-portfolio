@@ -49,7 +49,7 @@ export const getEmployeeEmergencyContacts = createServerAction(
     const headers = await createAuthHeaders();
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employees/emergency/${empleadoId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employees/emergency/${empleadoId}`,
       {
         method: "GET",
         headers,
@@ -75,7 +75,7 @@ export const createEmployeeEmergencyContact = createServerAction(
     const headers = await createAuthHeaders();
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employees/emergency/${empleadoId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employees/emergency/${empleadoId}`,
       {
         method: "POST",
         headers,
@@ -102,7 +102,7 @@ export const updateEmployeeEmergencyContact = createServerAction(
     const headers = await createAuthHeaders();
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employees/emergency/modify/${contactoId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employees/emergency/modify/${contactoId}`,
       {
         method: "PUT",
         headers,
@@ -126,7 +126,7 @@ export const deleteEmployeeEmergencyContact = createServerAction(
     const headers = await createAuthHeaders();
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employees/emergency/delete/${contactoId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employees/emergency/delete/${contactoId}`,
       {
         method: "DELETE",
         headers,

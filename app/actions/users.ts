@@ -15,7 +15,7 @@ export const getUsers = createServerAction(
     const searchQuery = search ? `&search=${search}` : "";
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/users?page=${page}&limit=${limit}${searchQuery}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/users?page=${page}&limit=${limit}${searchQuery}`,
       {
         headers,
         cache: "no-store",
@@ -34,7 +34,7 @@ export const getUsers = createServerAction(
 export const getUserById = createServerAction(async (id: number) => {
   const headers = await createAuthHeaders();
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/users/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/users/${id}`,
     {
       headers,
       cache: "no-store",
@@ -57,7 +57,7 @@ export const createUser = createServerAction(
   }) => {
     const headers = await createAuthHeaders();
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
       method: "POST",
       headers,
       body: JSON.stringify(userData),
@@ -84,7 +84,7 @@ export const updateUser = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/users/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/users/${id}`,
       {
         method: "PATCH",
         headers,
@@ -105,7 +105,7 @@ export const changeUserStatus = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/users/${id}/status`,
+      `${process.env.NEXT_PUBLIC_API_URL}/users/${id}/status`,
       {
         method: "PATCH",
         headers,
@@ -127,7 +127,7 @@ export const deleteUser = createServerAction(async (id: number) => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/users/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/users/${id}`,
     {
       method: "DELETE",
       headers,

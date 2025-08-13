@@ -20,7 +20,7 @@ export const getSanitarios = createServerAction(
     const searchQuery = search ? `&search=${search}` : "";
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/chemical_toilets?page=${page}&limit=${limit}${searchQuery}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/chemical_toilets?page=${page}&limit=${limit}${searchQuery}`,
       {
         headers,
         cache: "no-store",
@@ -40,7 +40,7 @@ export const editSanitario = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/chemical_toilets/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/chemical_toilets/${id}`,
       {
         method: "PUT",
         headers,
@@ -68,7 +68,7 @@ export const deleteSanitario = createServerAction(async (id: string) => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/chemical_toilets/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/chemical_toilets/${id}`,
     {
       method: "DELETE",
       headers,
@@ -86,7 +86,7 @@ export const createSanitario = createServerAction(async (data: Sanitario) => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/chemical_toilets`,
+    `${process.env.NEXT_PUBLIC_API_URL}/chemical_toilets`,
     {
       method: "POST",
       headers,
@@ -112,7 +112,7 @@ export const getToiletsList = createServerAction(async () => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/chemical_toilets`,
+    `${process.env.NEXT_PUBLIC_API_URL}/chemical_toilets`,
     {
       headers,
       cache: "no-store",
@@ -137,7 +137,7 @@ export const getSanitariosEnMantenimiento = createServerAction(
     const searchQuery = search ? `&search=${search}` : "";
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/toilet_maintenance?page=${page}&limit=${limit}${searchQuery}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/toilet_maintenance?page=${page}&limit=${limit}${searchQuery}`,
       {
         headers,
         cache: "no-store",
@@ -160,7 +160,7 @@ export const deleteSanitarioEnMantenimiento = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/toilet_maintenance/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/toilet_maintenance/${id}`,
       {
         method: "DELETE",
         headers,
@@ -184,7 +184,7 @@ export const createSanitarioEnMantenimiento = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/toilet_maintenance`,
+      `${process.env.NEXT_PUBLIC_API_URL}/toilet_maintenance`,
       {
         method: "POST",
         headers,
@@ -216,7 +216,7 @@ export const editSanitarioEnMantenimiento = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/toilet_maintenance/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/toilet_maintenance/${id}`,
       {
         method: "PUT",
         headers,
@@ -245,7 +245,7 @@ export const completarMantenimientoSanitario = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/toilet_maintenance/${id}/complete`,
+      `${process.env.NEXT_PUBLIC_API_URL}/toilet_maintenance/${id}/complete`,
       {
         method: "PATCH",
         headers,
@@ -269,7 +269,7 @@ export const getSanitariosByClient = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/chemical_toilets/by-client/${clientId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/chemical_toilets/by-client/${clientId}`,
       {
         headers,
         cache: "no-store",
@@ -291,7 +291,7 @@ export const getTotalSanitarios = createServerAction(async () => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/chemical_toilets/total_chemical_toilets`,
+    `${process.env.NEXT_PUBLIC_API_URL}/chemical_toilets/total_chemical_toilets`,
     {
       headers,
       cache: "no-store",
@@ -310,7 +310,7 @@ export const getToiletServices = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/chemical_toilets/${toiletId}/services`,
+      `${process.env.NEXT_PUBLIC_API_URL}/chemical_toilets/${toiletId}/services`,
       {
         headers,
         cache: "no-store",

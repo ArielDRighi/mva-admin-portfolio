@@ -23,7 +23,7 @@ export const getMantenimientosVehiculos = createServerAction(
       `Fetching vehicle maintenance with page=${page}, limit=${limit}, search=${search}`
     );
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/vehicle_maintenance?page=${page}&limit=${limit}${searchQuery}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/vehicle_maintenance?page=${page}&limit=${limit}${searchQuery}`,
       {
         headers,
         cache: "no-store",
@@ -45,7 +45,7 @@ export const getMantenimientosProgramados = createServerAction(async () => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/vehicle_maintenance/upcoming`,
+    `${process.env.NEXT_PUBLIC_API_URL}/vehicle_maintenance/upcoming`,
     {
       headers,
       cache: "no-store",
@@ -63,7 +63,7 @@ export const getMantenimientoVehiculoPorId = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/vehicle_maintenance/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/vehicle_maintenance/${id}`,
       {
         headers,
         cache: "no-store",
@@ -86,7 +86,7 @@ export const getMantenimientosPorVehiculo = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/vehicle_maintenance/vehiculo/${vehiculoId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/vehicle_maintenance/vehiculo/${vehiculoId}`,
       {
         headers,
         cache: "no-store",
@@ -109,7 +109,7 @@ export const createMantenimientoVehiculo = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/vehicle_maintenance`,
+      `${process.env.NEXT_PUBLIC_API_URL}/vehicle_maintenance`,
       {
         method: "POST",
         headers,
@@ -141,7 +141,7 @@ export const editMantenimientoVehiculo = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/vehicle_maintenance/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/vehicle_maintenance/${id}`,
       {
         method: "PUT",
         headers,
@@ -172,7 +172,7 @@ export const deleteMantenimientoVehiculo = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/vehicle_maintenance/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/vehicle_maintenance/${id}`,
       {
         method: "DELETE",
         headers,
@@ -196,7 +196,7 @@ export const completarMantenimientoVehiculo = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/vehicle_maintenance/${id}/complete`,
+      `${process.env.NEXT_PUBLIC_API_URL}/vehicle_maintenance/${id}/complete`,
       {
         method: "PATCH",
         headers,
@@ -224,7 +224,7 @@ export async function fetchMantenimientosVehiculos(
   const searchQuery = search ? `&search=${encodeURIComponent(search)}` : "";
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/vehicle_maintenance?page=${page}&limit=${limit}${searchQuery}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/vehicle_maintenance?page=${page}&limit=${limit}${searchQuery}`,
     {
       headers,
       cache: "no-store",

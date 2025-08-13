@@ -19,7 +19,7 @@ export const getEmployees = createServerAction(
 
     // Llamada al API con el término de búsqueda
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employees?page=${page}&limit=${limit}${searchQuery}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employees?page=${page}&limit=${limit}${searchQuery}`,
       {
         headers,
         cache: "no-store",
@@ -38,7 +38,7 @@ export const getEmployeeById = createServerAction(async (id: string) => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/employees/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/employees/${id}`,
     {
       headers,
       cache: "no-store",
@@ -56,7 +56,7 @@ export const getEmployeeByDocumento = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employees/documento/${documento}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employees/documento/${documento}`,
       {
         headers,
         cache: "no-store",
@@ -76,7 +76,7 @@ export const editEmployee = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employees/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employees/${id}`,
       {
         method: "PUT",
         headers,
@@ -97,7 +97,7 @@ export const deleteEmployee = createServerAction(async (id: number) => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/employees/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/employees/${id}`,
     {
       method: "DELETE",
       headers,
@@ -116,7 +116,7 @@ export const createEmployee = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employees`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employees`,
       {
         method: "POST",
         headers,
@@ -138,7 +138,7 @@ export const changeEmployeeStatus = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employees/${id}/estado`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employees/${id}/estado`,
       {
         method: "PATCH",
         headers,
@@ -159,7 +159,7 @@ export const getTotalEmployees = createServerAction(async () => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/employees/total_employees`,
+    `${process.env.NEXT_PUBLIC_API_URL}/employees/total_employees`,
     {
       headers,
       cache: "no-store",
@@ -177,7 +177,7 @@ export const getMineAssignedServicesPending = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/services/assigned/pendings/${employeeId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/services/assigned/pendings/${employeeId}`,
       {
         headers,
         cache: "no-store",
@@ -200,7 +200,7 @@ export const getMineAssignedServicesInProgress = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/services/assigned/inProgress/${employeeId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/services/assigned/inProgress/${employeeId}`,
       {
         headers,
         cache: "no-store",
@@ -223,7 +223,7 @@ export const getLastServicesByUserId = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/services/employee/${employeeId}/last`,
+      `${process.env.NEXT_PUBLIC_API_URL}/services/employee/${employeeId}/last`,
       {
         headers,
         cache: "no-store",
@@ -249,7 +249,7 @@ export const getCompletedServicesByEmployee = createServerAction(
     const searchQuery = search ? `&search=${search}` : "";
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/services/employee/${employeeId}/completed?page=${page}&limit=${limit}${searchQuery}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/services/employee/${employeeId}/completed?page=${page}&limit=${limit}${searchQuery}`,
       {
         headers,
         cache: "no-store",
@@ -272,7 +272,7 @@ export const getProximosServiciosPorEmpleado = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employees/${employeeId}/proximos-servicios`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employees/${employeeId}/proximos-servicios`,
       {
         headers,
         cache: "no-store",

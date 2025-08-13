@@ -22,7 +22,7 @@ export const getVehicles = createServerAction(
     const searchQuery = search ? `&search=${encodeURIComponent(search)}` : "";
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/vehicles?page=${page}&limit=${limit}${searchQuery}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/vehicles?page=${page}&limit=${limit}${searchQuery}`,
       {
         headers,
         cache: "no-store",
@@ -43,7 +43,7 @@ export const getVehicleById = createServerAction(async (id: number) => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/vehicles/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/vehicles/${id}`,
     {
       headers,
       cache: "no-store",
@@ -62,7 +62,7 @@ export const getVehicleByPlaca = createServerAction(async (placa: string) => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/vehicles/placa/${placa}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/vehicles/placa/${placa}`,
     {
       headers,
       cache: "no-store",
@@ -83,7 +83,7 @@ export const editVehicle = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/vehicles/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/vehicles/${id}`,
       {
         method: "PUT",
         headers,
@@ -107,7 +107,7 @@ export const deleteVehicle = createServerAction(async (id: number) => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/vehicles/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/vehicles/${id}`,
     {
       method: "DELETE",
       headers,
@@ -128,7 +128,7 @@ export const createVehicle = createServerAction(
   async (data: CreateVehiculo) => {
     const headers = await createAuthHeaders();
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/vehicles`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vehicles`, {
       method: "POST",
       headers,
       body: JSON.stringify(data),
@@ -151,7 +151,7 @@ export const changeVehicleStatus = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/vehicles/${id}/estado`,
+      `${process.env.NEXT_PUBLIC_API_URL}/vehicles/${id}/estado`,
       {
         method: "PATCH",
         headers,
@@ -174,7 +174,7 @@ export const getTotalVehicles = createServerAction(async () => {
   const headers = await createAuthHeaders();
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/vehicles/total_vehicles`,
+    `${process.env.NEXT_PUBLIC_API_URL}/vehicles/total_vehicles`,
     {
       method: "GET",
       headers,

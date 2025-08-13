@@ -39,7 +39,7 @@ export const createMyClothing = createServerAction(
     const headers = await createAuthHeaders();
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/clothing/create/${employeeId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/clothing/create/${employeeId}`,
       {
         method: "POST",
         headers,
@@ -59,7 +59,7 @@ export const getMyClothing = createServerAction(async (employeeId: number) => {
   const headers = await createAuthHeaders();
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/clothing/${employeeId}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/clothing/${employeeId}`,
     {
       method: "GET",
       headers,
@@ -80,7 +80,7 @@ export const updateMyClothing = createServerAction(
     const headers = await createAuthHeaders();
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/clothing/modify/${employeeId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/clothing/modify/${employeeId}`,
       {
         method: "PUT",
         headers,
@@ -210,7 +210,7 @@ export const getTallesEmpleadoById = createServerAction(
     const headers = await createAuthHeaders();
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/clothing/${empleadoId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/clothing/${empleadoId}`,
       {
         headers,
         cache: "no-store",
@@ -233,7 +233,7 @@ export const createTallesEmpleado = createServerAction(
     const headers = await createAuthHeaders();
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/clothing/create/${empleadoId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/clothing/create/${empleadoId}`,
       {
         method: "POST",
         headers,
@@ -257,7 +257,7 @@ export const updateTallesEmpleado = createServerAction(
     const headers = await createAuthHeaders();
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/clothing/modify/${empleadoId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/clothing/modify/${empleadoId}`,
       {
         method: "PUT",
         headers,
@@ -281,7 +281,7 @@ export const deleteTallesEmpleado = createServerAction(
     const headers = await createAuthHeaders();
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/clothing/delete/${empleadoId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/clothing/delete/${empleadoId}`,
       {
         method: "DELETE",
         headers,
@@ -304,7 +304,7 @@ export const exportTallesToExcel = createServerAction(
     const headers = await createAuthHeaders();
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/clothing/export`,
+      `${process.env.NEXT_PUBLIC_API_URL}/clothing/export`,
       {
         headers,
       }

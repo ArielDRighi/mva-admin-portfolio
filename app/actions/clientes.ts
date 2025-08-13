@@ -14,7 +14,7 @@ export const getClients = createServerAction(
   async (page: number = 1, limit: number = 15, search: string = "") => {
     const headers = await createAuthHeaders();
     const searchParam = search ? `&search=${search}` : "";
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/api/clients?page=${page}&limit=${limit}${searchParam}`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/clients?page=${page}&limit=${limit}${searchParam}`;
 
     const res = await fetch(url, {
       headers,
@@ -31,7 +31,7 @@ export const getClients = createServerAction(
  */
 export const createClient = createServerAction(async (data: Cliente) => {
   const headers = await createAuthHeaders();
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/clients`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/clients`, {
     method: "POST",
     headers,
     body: JSON.stringify({
@@ -61,7 +61,7 @@ export const editClient = createServerAction(
   async (id: string, data: Cliente) => {
     const headers = await createAuthHeaders();
       const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/clients/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/clients/${id}`,
       {
         method: "PUT",
         headers,
@@ -95,7 +95,7 @@ export const deleteClient = createServerAction(async (id: string) => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/clients/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/clients/${id}`,
     {
       method: "DELETE",
       headers,

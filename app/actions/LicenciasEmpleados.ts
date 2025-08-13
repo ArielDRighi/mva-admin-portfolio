@@ -20,7 +20,7 @@ export const getEmployeeLeaves = createServerAction(
     const searchQuery = search ? `&search=${encodeURIComponent(search)}` : "";
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employee-leaves?page=${page}&limit=${limit}${searchQuery}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employee-leaves?page=${page}&limit=${limit}${searchQuery}`,
       {
         headers,
         cache: "no-store",
@@ -42,7 +42,7 @@ export const getEmployeeLeaveById = createServerAction(async (id: number) => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/employee-leaves/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/employee-leaves/${id}`,
     {
       headers,
       cache: "no-store",
@@ -69,7 +69,7 @@ export const getLeavesByEmployee = createServerAction(
     const paginationQuery = `?page=${page}&limit=${limit}`;
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employee-leaves/employee/${employeeId}${paginationQuery}${searchQuery}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employee-leaves/employee/${employeeId}${paginationQuery}${searchQuery}`,
       {
         headers,
         cache: "no-store",
@@ -89,7 +89,7 @@ export const createEmployeeLeave = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employee-leaves`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employee-leaves`,
       {
         method: "POST",
         headers,
@@ -111,7 +111,7 @@ export const updateEmployeeLeave = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employee-leaves/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employee-leaves/${id}`,
       {
         method: "PATCH",
         headers,
@@ -132,7 +132,7 @@ export const approveEmployeeLeave = createServerAction(async (id: number) => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/employee-leaves/${id}/approve`,
+    `${process.env.NEXT_PUBLIC_API_URL}/employee-leaves/${id}/approve`,
     {
       method: "PATCH",
       headers,
@@ -150,7 +150,7 @@ export const deleteEmployeeLeave = createServerAction(async (id: number) => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/employee-leaves/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/employee-leaves/${id}`,
     {
       method: "DELETE",
       headers,
@@ -168,7 +168,7 @@ export const rejectEmployeeLeave = createServerAction(async (id: number) => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/employee-leaves/${id}/reject`,
+    `${process.env.NEXT_PUBLIC_API_URL}/employee-leaves/${id}/reject`,
     {
       method: "PATCH",
       headers,
@@ -196,7 +196,7 @@ export const getLicenciasByUserId = createServerAction(
     const paginationQuery = `?page=${page}&limit=${limit}`;
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employee-leaves/employee/${userId}${paginationQuery}${searchQuery}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employee-leaves/employee/${userId}${paginationQuery}${searchQuery}`,
       {
         headers,
         cache: "no-store",

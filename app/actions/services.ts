@@ -20,7 +20,7 @@ export const getServices = createServerAction(
 
     console.log("api/services?" + queryParams.toString());
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/services${
+      `${process.env.NEXT_PUBLIC_API_URL}/services${
         queryParams.toString() ? `?${queryParams.toString()}` : ""
       }`,
       {
@@ -41,7 +41,7 @@ export const getServiceById = createServerAction(async (id: number) => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/services/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/services/${id}`,
     {
       headers,
       cache: "no-store",
@@ -59,7 +59,7 @@ export const getServicesByDateRange = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/services/date-range?startDate=${startDate}&endDate=${endDate}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/services/date-range?startDate=${startDate}&endDate=${endDate}`,
       {
         headers,
         cache: "no-store",
@@ -81,7 +81,7 @@ export const getTodayServices = createServerAction(async () => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/services/today`,
+    `${process.env.NEXT_PUBLIC_API_URL}/services/today`,
     {
       headers,
       cache: "no-store",
@@ -98,7 +98,7 @@ export const getPendingServices = createServerAction(async () => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/services/pending`,
+    `${process.env.NEXT_PUBLIC_API_URL}/services/pending`,
     {
       headers,
       cache: "no-store",
@@ -115,7 +115,7 @@ export const getInProgressServices = createServerAction(async () => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/services/in-progress`,
+    `${process.env.NEXT_PUBLIC_API_URL}/services/in-progress`,
     {
       headers,
       cache: "no-store",
@@ -133,7 +133,7 @@ export const getClientInstalledToilets = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/chemical_toilets/by-client/${clientId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/chemical_toilets/by-client/${clientId}`,
       {
         headers,
         cache: "no-store",
@@ -156,7 +156,7 @@ export const updateService = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/services/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/services/${id}`,
       {
         method: "PUT",
         headers,
@@ -178,7 +178,7 @@ export const changeServiceStatus = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/services/${id}/estado`,
+      `${process.env.NEXT_PUBLIC_API_URL}/services/${id}/estado`,
       {
         method: "PATCH",
         headers,
@@ -199,7 +199,7 @@ export const deleteService = createServerAction(async (id: number) => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/services/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/services/${id}`,
     {
       method: "DELETE",
       headers,
@@ -217,7 +217,7 @@ export const getProximosServices = createServerAction(async () => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/services/proximos`,
+    `${process.env.NEXT_PUBLIC_API_URL}/services/proximos`,
     {
       headers,
       cache: "no-store",
@@ -234,7 +234,7 @@ export const getServicesStats = createServerAction(async () => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/services/stats`,
+    `${process.env.NEXT_PUBLIC_API_URL}/services/stats`,
     {
       headers,
       cache: "no-store",
@@ -254,7 +254,7 @@ export const getResumeServices = createServerAction(async () => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/services/resumen`,
+    `${process.env.NEXT_PUBLIC_API_URL}/services/resumen`,
     {
       headers,
       cache: "no-store",
@@ -297,7 +297,7 @@ export const getRecentActivity = createServerAction(async () => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/recent_activity/global`,
+    `${process.env.NEXT_PUBLIC_API_URL}/recent_activity/global`,
     {
       headers,
       cache: "no-store",
@@ -322,7 +322,7 @@ export const updateStatusService = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/services/${id}/estado`,
+      `${process.env.NEXT_PUBLIC_API_URL}/services/${id}/estado`,
       {
         method: "PATCH",
         headers,
@@ -355,7 +355,7 @@ export const createServiceCapacitacion = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/services/capacitacion`,
+      `${process.env.NEXT_PUBLIC_API_URL}/services/capacitacion`,
       {
         method: "POST",
         headers,
@@ -428,7 +428,7 @@ export const createServiceInstalacion = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/services/instalacion`,
+      `${process.env.NEXT_PUBLIC_API_URL}/services/instalacion`,
       {
         method: "POST",
         headers,
@@ -449,7 +449,7 @@ export const getInstalaciones = createServerAction(async (page: number) => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/services/instalacion?page=${page}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/services/instalacion?page=${page}`,
     {
       headers,
       cache: "no-store",
@@ -492,12 +492,12 @@ export const createServicioGenerico = createServerAction(
     console.log("[createServicioGenerico] Token found, making API request");
     console.log(
       "[createServicioGenerico] API URL:",
-      `${process.env.NEXT_PUBLIC_API_URL}/api/services/generico`
+      `${process.env.NEXT_PUBLIC_API_URL}/services/generico`
     );
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/services/generico`,
+        `${process.env.NEXT_PUBLIC_API_URL}/services/generico`,
         {
           method: "POST",
           headers,
@@ -533,7 +533,7 @@ export const getServiciosGenericos = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/services/generico?page=${page}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/services/generico?page=${page}`,
       {
         headers,
         cache: "no-store",
@@ -618,7 +618,7 @@ export const getFutureCleaningById = createServerAction(async (id: number) => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/future_cleanings/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/future_cleanings/${id}`,
     {
       headers,
       cache: "no-store",
@@ -644,7 +644,7 @@ export const createFutureCleaning = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/future_cleanings`,
+      `${process.env.NEXT_PUBLIC_API_URL}/future_cleanings`,
       {
         method: "POST",
         headers,
@@ -673,7 +673,7 @@ export const modifyFutureCleaning = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/future_cleanings/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/future_cleanings/${id}`,
       {
         method: "PUT",
         headers,
@@ -694,7 +694,7 @@ export const deleteFutureCleaning = createServerAction(async (id: number) => {
   const headers = await createAuthHeaders();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/future_cleanings/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/future_cleanings/${id}`,
     {
       method: "DELETE",
       headers,
@@ -736,7 +736,7 @@ export const createServicioRetiro = createServerAction(
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/services/generico`,
+        `${process.env.NEXT_PUBLIC_API_URL}/services/generico`,
         {
           method: "POST",
           headers,

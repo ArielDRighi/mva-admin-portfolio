@@ -15,7 +15,7 @@ import { config } from "@/app/config";
  */
 export async function loginUser(email: string, password: string) {
   try {
-    const res = await fetch(`${config.apiUrl}/api/auth/login`, {
+    const res = await fetch(`${config.apiUrl}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +56,7 @@ export async function forgotPassword(email: string): Promise<{
   };
 }> {
   try {
-    const res = await fetch(`${config.apiUrl}/api/auth/forgot_password`, {
+    const res = await fetch(`${config.apiUrl}/auth/forgot_password`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -98,7 +98,7 @@ export async function changePassword(
       throw new Error("No hay sesión activa");
     }
 
-    const res = await fetch(`${config.apiUrl}/api/auth/change_password`, {
+    const res = await fetch(`${config.apiUrl}/auth/change_password`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -14,7 +14,7 @@ export const getLicenciaByEmpleadoId = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employees/licencia/${empleadoId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employees/licencia/${empleadoId}`,
       {
         headers,
         cache: "no-store",
@@ -40,7 +40,7 @@ export const updateLicenciaConducir = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employees/licencia/update/${empleadoId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employees/licencia/update/${empleadoId}`,
       {
         method: "PUT",
         headers,
@@ -67,7 +67,7 @@ export const createLicenciaConducir = createServerAction(
     const headers = await createAuthHeaders();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employees/licencia/${empleadoId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employees/licencia/${empleadoId}`,
       {
         method: "POST",
         headers,
@@ -98,7 +98,7 @@ export const getLicenciasToExpire = createServerAction(
     const searchQuery = search ? `&search=${encodeURIComponent(search)}` : "";
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employees/licencias/por-vencer?dias=${dias}&page=${page}&limit=${limit}${searchQuery}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employees/licencias/por-vencer?dias=${dias}&page=${page}&limit=${limit}${searchQuery}`,
       {
         headers,
         cache: "no-store",
@@ -125,7 +125,7 @@ export const getLicenciasConducir = createServerAction(
     const searchQuery = search ? `&search=${encodeURIComponent(search)}` : "";
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/employees/licencias?page=${page}&limit=${limit}${searchQuery}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/employees/licencias?page=${page}&limit=${limit}${searchQuery}`,
       {
         headers,
         cache: "no-store",
