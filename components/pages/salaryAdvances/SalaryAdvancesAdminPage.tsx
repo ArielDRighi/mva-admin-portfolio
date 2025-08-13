@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getAllAdvancesAction } from "@/app/actions/salaryAdvanceActions";
+import { getSalaryAdvances } from "@/lib/apiClient";
 import ListadoSalaryAdvancesAdminComponent from "@/components/sections/ListadoSalaryAdvancesAdminComponent";
 import { SalaryAdvanceListResponse, SalaryAdvance } from "@/types/salaryAdvanceTypes";
 import React from "react";
@@ -19,9 +19,9 @@ export default function SalaryAdvancesAdminPage() {
       try {
         setLoading(true);
         setError(null);
-        const result = await getAllAdvancesAction();
-        
-        if (result && typeof result === 'object') {
+        const result = await getSalaryAdvances();
+
+        if (result && typeof result === "object") {
           const response = result as SalaryAdvanceListResponse;
           setAdvances(response.advances || []);
           setTotalItems(response.total || 0);
@@ -76,4 +76,4 @@ export default function SalaryAdvancesAdminPage() {
       </div>
     </main>
   );
-};
+}
