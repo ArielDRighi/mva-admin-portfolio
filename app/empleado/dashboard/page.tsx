@@ -1,5 +1,7 @@
+"use client";
+
 import DashboardEmpleadosPage from "@/components/pages/Dashboard-Empleados/DashboardEmpleadosPage";
 
-export default async function DahsboardEmpleado() {
+export default function DahsboardEmpleado() {
   return <DashboardEmpleadosPage />;
 }
