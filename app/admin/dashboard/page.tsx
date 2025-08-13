@@ -1,8 +1,7 @@
 // app/dashboard/page.tsx
-"use client";
 
 import DashboardPage from "@/components/pages/DashboardPage";
 
-export default function Dashboard() {
+export default async function Dashboard() {
   return <DashboardPage />;
 }
