@@ -1,7 +1,7 @@
 "use client";
 
 import { getCookie } from "cookies-next";
-import { SalaryAdvanceListResponse } from "@/types/salaryAdvanceTypes";
+import { SalaryAdvanceListResponse, SalaryAdvance } from "@/types/salaryAdvanceTypes";
 import { RopaTalles } from "@/types/types";
 import { CreateTallesDto, UpdateTallesDto } from "@/app/actions/clothing";
 
@@ -71,8 +71,51 @@ export async function clientFetch<T>(endpoint: string, options: RequestInit = {}
  */
 
 // Salary Advances
-export async function getSalaryAdvances(): Promise<SalaryAdvanceListResponse> {
-  return clientFetch<SalaryAdvanceListResponse>("/salary-advances");
+export async function getSalaryAdvances(filters?: {
+  status?: "pending" | "approved" | "rejected";
+  employeeId?: number;
+  dateFrom?: string;
+  dateTo?: string;
+  page?: number;
+  limit?: number;
+}): Promise<SalaryAdvanceListResponse> {
+  const params = new URLSearchParams();
+
+  if (filters?.status) {
+    params.append("status", filters.status);
+  }
+  if (filters?.employeeId) {
+    params.append("employeeId", filters.employeeId.toString());
+  }
+  if (filters?.dateFrom) {
+    params.append("dateFrom", filters.dateFrom);
+  }
+  if (filters?.dateTo) {
+    params.append("dateTo", filters.dateTo);
+  }
+  if (filters?.page) {
+    params.append("page", filters.page.toString());
+  }
+  if (filters?.limit) {
+    params.append("limit", filters.limit.toString());
+  }
+
+  const endpoint = `/salary-advances${params.toString() ? `?${params.toString()}` : ""}`;
+  return clientFetch<SalaryAdvanceListResponse>(endpoint);
+}
+
+export async function approveAdvance(id: number): Promise<SalaryAdvance> {
+  return clientFetch(`/salary-advances/update/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify({ status: "approved" }),
+  });
+}
+
+export async function rejectAdvance(id: number): Promise<SalaryAdvance> {
+  return clientFetch(`/salary-advances/update/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify({ status: "rejected" }),
+  });
 }
 
 // Talles de empleados

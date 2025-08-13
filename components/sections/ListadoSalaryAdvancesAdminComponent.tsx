@@ -3,10 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { ListadoTabla } from "@/components/ui/local/ListadoTabla";
 import { Badge } from "@/components/ui/badge";
-import {
-  SalaryAdvance,
-  SalaryAdvanceFilters,
-} from "@/types/salaryAdvanceTypes";
+import { SalaryAdvance, SalaryAdvanceFilters } from "@/types/salaryAdvanceTypes";
 import { TableCell } from "../ui/table";
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -21,29 +18,10 @@ import {
 } from "@/components/ui/dialog";
 import Loader from "../ui/local/Loader";
 import React from "react";
-import {
-  CheckCircle,
-  XCircle,
-  Calendar,
-  FileText,
-  ClipboardList,
-  Search,
-  ThumbsUp,
-  ThumbsDown,
-} from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { CheckCircle, XCircle, Calendar, FileText, ClipboardList, Search, ThumbsUp, ThumbsDown } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  getAllAdvancesAction,
-  approveAdvanceAction,
-  rejectAdvanceAction,
-} from "@/app/actions/salaryAdvanceActions";
+import { getSalaryAdvances, approveAdvance, rejectAdvance } from "@/lib/apiClient";
 import { formatCurrency, formatDate } from "@/lib/utils";
 
 const ListadoSalaryAdvancesAdminComponent = ({
@@ -70,12 +48,8 @@ const ListadoSalaryAdvancesAdminComponent = ({
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
-  const [selectedAdvance, setSelectedAdvance] = useState<SalaryAdvance | null>(
-    null
-  );
-  const [actionType, setActionType] = useState<"approve" | "reject" | null>(
-    null
-  );
+  const [selectedAdvance, setSelectedAdvance] = useState<SalaryAdvance | null>(null);
+  const [actionType, setActionType] = useState<"approve" | "reject" | null>(null);
 
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -129,13 +103,13 @@ const ListadoSalaryAdvancesAdminComponent = ({
       setLoading(true);
 
       if (actionType === "approve") {
-        await approveAdvanceAction(selectedAdvance.id);
+        await approveAdvance(selectedAdvance.id);
         toast.success("Solicitud aprobada", {
           description: "El adelanto salarial ha sido aprobado correctamente.",
           duration: 3000,
         });
       } else {
-        await rejectAdvanceAction(selectedAdvance.id);
+        await rejectAdvance(selectedAdvance.id);
         toast.success("Solicitud rechazada", {
           description: "El adelanto salarial ha sido rechazado.",
           duration: 3000,
@@ -144,24 +118,13 @@ const ListadoSalaryAdvancesAdminComponent = ({
 
       await fetchAdvances();
     } catch (error) {
-      console.error(
-        `Error al ${
-          actionType === "approve" ? "aprobar" : "rechazar"
-        } el adelanto:`,
-        error
-      );
-      const errorMessage =
-        error instanceof Error ? error.message : "Error desconocido";
+      console.error(`Error al ${actionType === "approve" ? "aprobar" : "rechazar"} el adelanto:`, error);
+      const errorMessage = error instanceof Error ? error.message : "Error desconocido";
 
-      toast.error(
-        `Error al ${
-          actionType === "approve" ? "aprobar" : "rechazar"
-        } adelanto`,
-        {
-          description: errorMessage,
-          duration: 5000,
-        }
-      );
+      toast.error(`Error al ${actionType === "approve" ? "aprobar" : "rechazar"} adelanto`, {
+        description: errorMessage,
+        duration: 5000,
+      });
     } finally {
       setLoading(false);
       setConfirmDialogOpen(false);
@@ -172,22 +135,18 @@ const ListadoSalaryAdvancesAdminComponent = ({
 
   const fetchAdvances = useCallback(async () => {
     const currentPage = Number(searchParams.get("page")) || 1;
-    const status =
-      (searchParams.get("status") as SalaryAdvanceFilters["status"]) || "all";
+    const status = (searchParams.get("status") as SalaryAdvanceFilters["status"]) || "all";
 
     setLoading(true);
 
     try {
-      const filters: SalaryAdvanceFilters = {
+      const filters = {
         page: currentPage,
         limit: itemsPerPage,
-        status:
-          status === "all"
-            ? undefined
-            : (status as SalaryAdvanceFilters["status"]),
+        status: status === "all" ? undefined : (status as "pending" | "approved" | "rejected"),
       };
 
-      const result = await getAllAdvancesAction(filters);
+      const result = await getSalaryAdvances(filters);
 
       if (result) {
         setAdvances(result.advances);
@@ -196,8 +155,7 @@ const ListadoSalaryAdvancesAdminComponent = ({
       }
     } catch (error) {
       console.error("Error al cargar los adelantos:", error);
-      const errorMessage =
-        error instanceof Error ? error.message : "Error desconocido";
+      const errorMessage = error instanceof Error ? error.message : "Error desconocido";
 
       toast.error("Error al cargar adelantos salariales", {
         description: errorMessage,
@@ -239,15 +197,11 @@ const ListadoSalaryAdvancesAdminComponent = ({
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "approved":
-        return (
-          <Badge className="bg-green-500 hover:bg-green-600">Aprobado</Badge>
-        );
+        return <Badge className="bg-green-500 hover:bg-green-600">Aprobado</Badge>;
       case "rejected":
         return <Badge className="bg-red-500 hover:bg-red-600">Rechazado</Badge>;
       case "pending":
-        return (
-          <Badge className="bg-amber-500 hover:bg-amber-600">Pendiente</Badge>
-        );
+        return <Badge className="bg-amber-500 hover:bg-amber-600">Pendiente</Badge>;
       default:
         return <Badge className="bg-slate-500">Desconocido</Badge>;
     }
@@ -258,22 +212,15 @@ const ListadoSalaryAdvancesAdminComponent = ({
       <CardHeader className="bg-slate-50 dark:bg-slate-900 border-b">
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="text-2xl font-bold">
-              Gestión de Adelantos Salariales
-            </CardTitle>
+            <CardTitle className="text-2xl font-bold">Gestión de Adelantos Salariales</CardTitle>
             <CardDescription className="text-muted-foreground mt-1">
-              Administra las solicitudes de adelantos salariales de los
-              empleados
+              Administra las solicitudes de adelantos salariales de los empleados
             </CardDescription>
           </div>
         </div>
 
         <div className="mt-4">
-          <Tabs
-            defaultValue="all"
-            value={activeTab}
-            onValueChange={handleTabChange}
-          >
+          <Tabs defaultValue="all" value={activeTab} onValueChange={handleTabChange}>
             <TabsList className="grid grid-cols-4 w-[500px]">
               <TabsTrigger value="all" className="flex items-center">
                 <ClipboardList className="mr-2 h-4 w-4" />
@@ -321,22 +268,16 @@ const ListadoSalaryAdvancesAdminComponent = ({
                   <span className="font-medium">
                     {advance.employee.nombre} {advance.employee.apellido}
                   </span>
-                  <span className="text-xs text-muted-foreground">
-                    Legajo: {advance.employee.legajo}
-                  </span>
+                  <span className="text-xs text-muted-foreground">Legajo: {advance.employee.legajo}</span>
                 </div>
               </TableCell>
               <TableCell>
-                <div className="flex items-center">
-                  {formatCurrency(advance.amount)}
-                </div>
+                <div className="flex items-center">{formatCurrency(advance.amount)}</div>
               </TableCell>
               <TableCell>
                 <div className="flex items-center">
                   <FileText className="mr-1 h-4 w-4 text-muted-foreground" />
-                  {advance.reason.length > 30
-                    ? advance.reason.substring(0, 30) + "..."
-                    : advance.reason}
+                  {advance.reason.length > 30 ? advance.reason.substring(0, 30) + "..." : advance.reason}
                 </div>
               </TableCell>
               <TableCell>{getStatusBadge(advance.status)}</TableCell>
@@ -372,8 +313,7 @@ const ListadoSalaryAdvancesAdminComponent = ({
                   )}
                   {advance.status !== "pending" && (
                     <span className="text-sm text-muted-foreground">
-                      {advance.status === "approved" ? "Aprobado" : "Rechazado"}{" "}
-                      por {advance.approvedBy || "Admin"}
+                      {advance.status === "approved" ? "Aprobado" : "Rechazado"} por {advance.approvedBy || "Admin"}
                     </span>
                   )}
                 </div>
@@ -386,14 +326,10 @@ const ListadoSalaryAdvancesAdminComponent = ({
       <Dialog open={confirmDialogOpen} onOpenChange={setConfirmDialogOpen}>
         <DialogContent className="[&>button]:cursor-pointer max-w-md">
           <DialogHeader>
-            <DialogTitle>
-              {actionType === "approve" ? "Aprobar" : "Rechazar"} adelanto
-              salarial
-            </DialogTitle>
+            <DialogTitle>{actionType === "approve" ? "Aprobar" : "Rechazar"} adelanto salarial</DialogTitle>
             <DialogDescription>
-              ¿Estás seguro de que deseas{" "}
-              {actionType === "approve" ? "aprobar" : "rechazar"} esta solicitud
-              de adelanto salarial?
+              ¿Estás seguro de que deseas {actionType === "approve" ? "aprobar" : "rechazar"} esta solicitud de adelanto
+              salarial?
             </DialogDescription>
           </DialogHeader>
 
@@ -403,15 +339,12 @@ const ListadoSalaryAdvancesAdminComponent = ({
                 <div>
                   <p className="text-sm font-medium">Empleado:</p>
                   <p className="text-sm">
-                    {selectedAdvance.employee.nombre}{" "}
-                    {selectedAdvance.employee.apellido}
+                    {selectedAdvance.employee.nombre} {selectedAdvance.employee.apellido}
                   </p>
                 </div>
                 <div>
                   <p className="text-sm font-medium">Monto:</p>
-                  <p className="text-sm">
-                    {formatCurrency(selectedAdvance.amount)}
-                  </p>
+                  <p className="text-sm">{formatCurrency(selectedAdvance.amount)}</p>
                 </div>
               </div>
               <div>
@@ -420,29 +353,19 @@ const ListadoSalaryAdvancesAdminComponent = ({
               </div>
               <div>
                 <p className="text-sm font-medium">Fecha de solicitud:</p>
-                <p className="text-sm">
-                  {formatDate(selectedAdvance.createdAt)}
-                </p>
+                <p className="text-sm">{formatDate(selectedAdvance.createdAt)}</p>
               </div>
             </div>
           )}
 
           <DialogFooter>
-            <Button
-              variant="outline"
-              onClick={() => setConfirmDialogOpen(false)}
-              disabled={loading}
-            >
+            <Button variant="outline" onClick={() => setConfirmDialogOpen(false)} disabled={loading}>
               Cancelar
             </Button>
             <Button
               onClick={confirmAction}
               disabled={loading}
-              className={
-                actionType === "approve"
-                  ? "bg-green-600 hover:bg-green-700"
-                  : "bg-red-600 hover:bg-red-700"
-              }
+              className={actionType === "approve" ? "bg-green-600 hover:bg-green-700" : "bg-red-600 hover:bg-red-700"}
             >
               {loading ? (
                 <div className="flex items-center">
