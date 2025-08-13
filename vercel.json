@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "mva-admin-frontend",
+  "name": "ar-admin-portfolio",
   "builds": [
     {
       "src": "package.json",

@@ -2,7 +2,7 @@ import ListadoTallesDeEmpleadosPage from "@/components/pages/tallesDeEmpleados/L
 import React from "react";
 
 export const metadata = {
-  title: "Gestión de Talles de Empleados | MVA Admin",
+  title: "Gestión de Talles de Empleados | AR Admin",
   description: "Administración de talles de ropa y calzado para empleados",
 };
 

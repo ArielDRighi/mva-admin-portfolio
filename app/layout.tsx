@@ -14,10 +14,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MVA - Sistema de Gestión",
-  description: "Sistema de Gestión de MVA",
+  title: "AR - Sistema de Gestión",
+  description: "Sistema de Gestión AR - Portfolio",
   icons: {
-    icon: "/images/MVA_LogoPNG.png",
+    icon: "/images/AR_LogoPNG.png",
   },
   robots: {
     index: false,
@@ -36,7 +36,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-r from-[#003F4F] via-[#00A4A6] to-[#C2EBEB]`}
       >
-        <Toaster richColors/>
+        <Toaster richColors />
         {children}
       </body>
     </html>

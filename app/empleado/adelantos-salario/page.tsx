@@ -1,9 +1,9 @@
-import { Metadata } from 'next';
-import CreateAdvanceForm from '@/components/sections/salary-advances/CreateAdvanceForm';
+import { Metadata } from "next";
+import CreateAdvanceForm from "@/components/sections/salary-advances/CreateAdvanceForm";
 
 export const metadata: Metadata = {
-  title: 'Mis Adelantos de Salario | MVA',
-  description: 'Solicita y revisa el estado de tus adelantos de salario',
+  title: "Mis Adelantos de Salario | AR",
+  description: "Solicita y revisa el estado de tus adelantos de salario",
 };
 
 export default function EmployeeAdvancesPage() {
